@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Menu from "@/components/menu/Menu";
 
 export default function Home() {
 
@@ -22,8 +23,13 @@ export default function Home() {
       <main className="hidden md:grid grid-cols-4 mt-10">
         {/* left  */}
         <section className="mx-10 col-span-1">
+          {/* vibly logo */}
           <div className="">
             <Image src={logo} height={100} width={100} alt="facebook logo" />
+          </div>
+          {/* left side menu  */}
+          <div className="mt-10">
+            <Menu />
           </div>
         </section>
         {/* middle  */}
