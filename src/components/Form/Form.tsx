@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from 'react'
-import { set, useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form';
 import { Input } from '../ui/input';
-import { CiSearch } from 'react-icons/ci';
+import { CiMicrophoneOn, CiSearch } from 'react-icons/ci';
 
 
 declare global{
@@ -20,8 +20,7 @@ const {
     register, 
     handleSubmit,
     setValue,
-    watch,
-  formState: { errors}
+    
     } = form;
     const SpeechRecognition =
        typeof window !== "undefined" && (window.SpeechRecognition || window.webkitSpeechRecognition);
@@ -41,7 +40,10 @@ const {
         recog.lang = "en-US";
 
         recog.onStart = ()=>setIsListening(true);
-        recog.onend = ()=> setIsListening(false);
+        recog.onend = ()=>{
+          setIsListening(false);
+          console.log("Speech recognition ended.");
+        };
 
         recog.onresult = (event: any) =>{
           let transcript = "";
@@ -54,6 +56,7 @@ const {
 
 
         recog.start();
+        setIsListening(true);
         setRecogintion(recog);
       }
       const stopListening = () =>{
@@ -62,12 +65,14 @@ const {
       }
         
   
-  const watchedSearchText = watch("searchText", "");
+  // const watchedSearchText = watch("searchText", "");
 //   console.log(watchedSearchText)
   const onSubmit = (data: any) => {
     console.log(data);
     
   }
+
+
   return (
     
         <form action="" onSubmit={handleSubmit(onSubmit)} className='flex items-center justify-center'>
@@ -77,9 +82,9 @@ const {
               />
               {
                 !isListening?(
-                  <button type='button' onClick={startSpeechRecogintion} className='ml-2 text-blue-500'>Start</button>
+                  <button type='button' onClick={startSpeechRecogintion} className='ml-2 text-blue-500'><CiMicrophoneOn  color='black' size={24} className='-ml-10'/></button>
                 ):(
-                  <button type='button' onClick={stopListening} className='ml-2 text-red-500'>Stop</button>
+                  <button type='button' onClick={stopListening} className='-ml-10 text-red-500 bg-gray-400 rounded-full p-1'>Stop</button>
                   )
               }
             </form>
