@@ -1,23 +1,31 @@
 "use client"
-import { IoIosArrowDown } from 'react-icons/io'
-import { FaUserFriends } from 'react-icons/fa'
-import { MdGroups, MdHome} from 'react-icons/md'
-import { useState } from "react"
-import { BiSolidMessageSquare } from 'react-icons/bi'
+import { useEffect, useRef, useState } from "react";
+import { BiSolidMessageSquare } from "react-icons/bi";
+import { FaUserFriends } from "react-icons/fa";
+import { IoIosArrowDown } from "react-icons/io";
+import { MdGroups, MdHome } from "react-icons/md";
 
-
-
-
-const Menu = () => {
+const ProfileMenu = () => {
   const [open, setOpen] = useState(false);
-  
+ const dropdownRef = useRef<HTMLDivElement>(null); 
     const handleTriggerClick = () => {
       setOpen(!open);
     }
+ useEffect(()=>{
+    const handleTriggerClickOutside=(event:MouseEvent)=>{
+        if(dropdownRef.current && !dropdownRef.current.contains(event.target as Node)){
+            setOpen(false)
+        }
+    }
+    document.addEventListener("mousedown", handleTriggerClickOutside);
+    return ()=>{
+        document.removeEventListener("mousedown",handleTriggerClickOutside)
+    }
+ },[])
 
 
     return (
-        <div className='my-6 border-1 border-gray-100 w-46 py-1 rounded-medium'>
+        <div ref={dropdownRef} className='w-52'>
             {/* dropdown container */}
             <div>
                 
@@ -47,4 +55,4 @@ Menu<IoIosArrowDown  className={`ml-1 transition-transform duration-300 ${
     )
 }
 
-export default Menu
+export default ProfileMenu
