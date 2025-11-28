@@ -8,8 +8,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Menu from "@/components/menu/Menu";
 import Social from "@/components/social/Social";
 import ProfileMenu from "@/components/profileMenu/ProfileMenu";
-import { Input } from "@/components/ui/input";
-import { HiVideoCamera } from "react-icons/hi";
+import CreatePost from "@/components/createPost/CreatePost";
+
+
 
 
 export default function Home() {
@@ -24,7 +25,7 @@ const user = 'Michel';
         <section className="mx-10 col-span-1 mt-10">
           {/* vibly logo */}
           <div className="">
-            <Image src={logo} height={100} width={100} alt="facebook logo" />
+            <Image src={logo} height={100} width={100} alt="vibly logo" />
           </div>
           {/* left side menu  */}
           <div >
@@ -44,24 +45,7 @@ const user = 'Michel';
             <Form />
           </div>
           {/* create post section */}
-          <div className="bg-gray-100 shadow-sm border border-gray-200 rounded-xs my-6 p-1 flex justify-center items-center gap-4">
-            {/* user profile pic  */}
-                <div className="w-12">
-                  <Image src="https://github.com/shadcn.png" alt="post image" width={100} height={100} className="rounded-full"/>
-                </div>
-                {/* post input field */}
-                <div>
-                  <Input placeholder={`What's on your mind ${user}`} />
-                </div>
-                {/* buton group  */}
-                <div>
-                  <button className="">
-                    <HiVideoCamera className="text-green-600"/>
-                  </button>
-                  <button></button>
-                  <button></button>
-                </div>
-          </div>
+          <CreatePost user={user}/>
         </section>
         {/* right side */}
         <section className="mx-10 col-span-1 mt-10">

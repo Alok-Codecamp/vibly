@@ -75,14 +75,14 @@ const {
 
   return (
     
-        <form action="" onSubmit={handleSubmit(onSubmit)} className='flex items-center justify-center'>
-              <CiSearch className='-mr-10'/>
+        <form action="" onSubmit={handleSubmit(onSubmit)} className='flex items-center justify-center w-full'>
+              <CiSearch className='-mr-8'/>
               <Input type="text" {...register("searchText")}  placeholder="search on vibly" 
-              className='rounded-3xl pl-14'
+              className='rounded-3xl pl-14 mx-auto'
               />
               {
                 !isListening?(
-                  <button type='button' onClick={startSpeechRecogintion} className='ml-2 text-blue-500'><CiMicrophoneOn  color='black' size={24} className='-ml-10'/></button>
+                  <button type='button' onClick={startSpeechRecogintion} className='-ml-10 text-blue-500'><CiMicrophoneOn  color='black' size={24} className=''/></button>
                 ):(
                   <button type='button' onClick={stopListening} className='-ml-10 text-red-500 bg-gray-400 rounded-full p-1'>Stop</button>
                   )
