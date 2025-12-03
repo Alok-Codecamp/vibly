@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vibly
+## vibly is a modern social media appllication designed to connect people through realtime application
 
-## Getting Started
+# Overview
+### A modern and interactive social media application designed to bring people closer through real-time communication, content sharing, and a seamless user experience.
 
-First, run the development server:
 
-```bash
+# Features
+
+###
+Real-time messaging
+
+Create, edit, and delete posts
+
+Like, comment, and share functionality
+
+User authentication & authorization
+
+Profile customization
+
+Newsfeed algorithm for personalized content
+
+Responsive and mobile-friendly UI
+
+Secure backend API with modern best practices
+
+Tech Stack
+
+Frontend: React / Next.js, Redux Toolkit, Tailwind CSS
+
+Backend: Node.js, Express.js
+
+Database: MongoDB, Mongoose
+
+Authentication: JWT / NextAuth
+
+State Management: Redux Toolkit / RTK Query
+
+Real-time: Socket.io
+###
+
+# Installation
+
+Clone the repository
+
+git clone https://github.com/your-username/vibly.git
+
+
+Navigate to the project directory
+
+cd vibly
+
+
+Install dependencies
+
+npm install
+
+
+Create an .env file and add your environment variables
+
+Start the development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm run dev – Start development server
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm run build – Build for production
 
-## Learn More
+npm start – Start production server
 
-To learn more about Next.js, take a look at the following resources:
+Folder Structure
+/vibly
+  /client
+  /server
+  /components
+  /routes
+  /controllers
+  /models
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+API Summary
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Auth APIs: Register, Login, Logout
 
-## Deploy on Vercel
+User APIs: Profile, Update Profile
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Post APIs: Create Post, Delete Post, Fetch Posts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Chat APIs: Real-time messaging with Socket.io
+
+Contribution
+
+Contributions are welcome!
+Please open an issue or submit a pull request if you want to improve the project.
+
+License
+
+This project is licensed under the MIT License.
+
+Contact
+
+For questions or suggestions, feel free to reach out.
