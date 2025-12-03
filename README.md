@@ -1,5 +1,5 @@
 # Vibly
-## vibly is a modern social media appllication designed to connect people through realtime application
+## vibly is a modern social media appllication designed to connect people through realtime interaction
 
 # Overview
 ### A modern and interactive social media application designed to bring people closer through real-time communication, content sharing, and a seamless user experience.
