@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import logo from "@/assets/logo/vibly.png"
 import Form from "@/components/Form/Form";
@@ -9,6 +10,11 @@ import Menu from "@/components/menu/Menu";
 import Social from "@/components/social/Social";
 import ProfileMenu from "@/components/profileMenu/ProfileMenu";
 import CreatePost from "@/components/createPost/CreatePost";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { decrement, increment } from "@/redux/features/counter/counterSlice";
+import { setUser } from "@/redux/features/authSlice";
+
 
 
 
@@ -16,8 +22,10 @@ import CreatePost from "@/components/createPost/CreatePost";
 export default function Home() {
 const user = 'Michel';
 
-
-
+  const counter = useSelector((state:RootState)=>state.counter.value)
+  console.log(counter);
+  const dispatch = useDispatch();
+  dispatch(setUser({user:{name:'Michel'},token:'abcd1234'}))
   return (
     <div className="">
       <main className="hidden md:grid grid-cols-4">
@@ -46,6 +54,11 @@ const user = 'Michel';
           </div>
           {/* create post section */}
           <CreatePost user={user}/>
+          <div>
+            <button onClick={()=>dispatch(increment())}>count++</button>
+            <span className="mx-5">{counter}</span>
+            <button onClick={()=>dispatch(decrement())}> count--</button>
+          </div>
         </section>
         {/* right side */}
         <section className="mx-10 col-span-1 mt-10">
@@ -64,6 +77,7 @@ const user = 'Michel';
             </div>
           </div>
         </section>
+        
       </main>
     </div>
   );
