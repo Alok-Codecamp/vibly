@@ -13,7 +13,7 @@ import CreatePost from "@/components/createPost/CreatePost";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { decrement, increment } from "@/redux/features/counter/counterSlice";
-import { setUser } from "@/redux/features/authSlice";
+import { setUser } from "@/redux/features/auth/authSlice";
 
 
 

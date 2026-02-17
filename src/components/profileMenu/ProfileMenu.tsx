@@ -1,4 +1,8 @@
 "use client"
+import { logOut } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { cookies } from "next/headers";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BiSolidMessageSquare } from "react-icons/bi";
 import { FaUserFriends } from "react-icons/fa";
@@ -7,6 +11,8 @@ import { MdGroups, MdHome } from "react-icons/md";
 
 const ProfileMenu = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
  const dropdownRef = useRef<HTMLDivElement>(null); 
     const handleTriggerClick = () => {
       setOpen(!open);
@@ -23,7 +29,11 @@ const ProfileMenu = () => {
     }
  },[])
 
-
+const handleLogOut = () =>{
+    dispatch(logOut())
+    
+    router.push('/login')
+}
     return (
         <div ref={dropdownRef} className='w-52'>
             {/* dropdown container */}
@@ -47,7 +57,9 @@ Menu<IoIosArrowDown  className={`ml-1 transition-transform duration-300 ${
                         Groups</li>
                     <li className='my-2 flex justify-start items-center'><span className='bg-[#8E53FD] p-1 mr-2 rounded-full'><BiSolidMessageSquare  size={22} color='white'/></span>
                         Messages</li>
-                       
+                       <li>
+                        <button onClick={handleLogOut} className="w-full text-left text-red-500">Logout</button>
+                       </li>
                 </ul>
                     :<></>}
             </div>

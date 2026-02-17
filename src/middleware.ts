@@ -5,21 +5,20 @@ import type { NextRequest } from 'next/server'
 
 
 export function middleware(request: NextRequest) {
-    
-    // const token = request.cookies.get('refreshToken')?.value;
-    const token = 'abcd'
+  const protectedRoute = ['/','/about']    
+    const token = request.cookies.get('refreshToken')?.value;
+    // const token = 'abcd'
     const { pathname } = request.nextUrl;
-  console.log(pathname);
 
-  if(pathname === '/'){
+  if(protectedRoute.includes(pathname)){
     if(!token){
     return NextResponse.rewrite(new URL('/login',request.url))
     }
-return NextResponse.rewrite(new URL('/about',request.url))
+return NextResponse.next();
   
 }
 }
 
 export const config = {
-  matcher: ['/'],
+  matcher: ['/','/about'],
 }

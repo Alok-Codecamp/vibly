@@ -1,6 +1,6 @@
 // user api endpoints
 
-import { baseApi } from "./baseApi";
+import { baseApi } from "../baseApi/baseApi";
 
 
 

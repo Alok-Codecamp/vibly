@@ -2,8 +2,8 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from '@/redux/features/counter/counterSlice'
-import { baseApi } from './features/api/baseApi'
-import authReducer from '@/redux/features/authSlice'
+import { baseApi } from './features/baseApi/baseApi'
+import authReducer from '@/redux/features/auth/authSlice'
 import storage from "redux-persist/es/storage";
 import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import { persistStore } from 'redux-persist';
