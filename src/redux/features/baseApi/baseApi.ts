@@ -8,14 +8,7 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
      baseUrl: 'http://localhost:5000/api',
      credentials:'include',
-     prepareHeaders:(headers,{getState})=>{
-      const token = ((getState() as RootState).auth.token) as string | null;
-      if(token){
-        headers.set('authorization',`Bearer ${token}`)
-      }
-      return headers;
-
-     } 
+   
     }),
   endpoints: ()=> ({}),
 })

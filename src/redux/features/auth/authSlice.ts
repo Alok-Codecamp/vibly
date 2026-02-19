@@ -4,13 +4,22 @@ import { RootState } from "../../store"
 
 
 type TAuthState = {
-    user:null|object,
-    token:null|string
+    user:null|{
+    id?: number;
+    firstName: string|null;
+    lastName: string|null;
+    dateOfBirth: string|null;
+    email: string|null;
+    password: string|null;
+    role: 'user'|'admin'|'guest';
+    profilePic?:string;
+    createdAt: Date|null;
+    isActive: boolean|null;
+    },
 }
 
 const initialState:TAuthState ={
     user:null,
-    token:null
 }
 
 const authSlice = createSlice({
@@ -18,16 +27,13 @@ const authSlice = createSlice({
     initialState,
     reducers:{
         setUser:(state,action)=>{
-            const {user,token} = action.payload
-            console.log(user,token)
-            if(token){
+            const {user} = action.payload
+            if(user){
                 state.user = user;
-                state.token = token;
             }
         },
         logOut:(state)=>{
             state.user = null;
-            state.token = null;
         }
         }
 })

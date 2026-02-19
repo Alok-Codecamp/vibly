@@ -9,14 +9,16 @@ export function middleware(request: NextRequest) {
     const token = request.cookies.get('refreshToken')?.value;
     // const token = 'abcd'
     const { pathname } = request.nextUrl;
-
-  if(protectedRoute.includes(pathname)){
-    if(!token){
-    return NextResponse.rewrite(new URL('/login',request.url))
-    }
+    const isProtectedRoute = protectedRoute.includes(pathname);
+    console.log(request.arrayBuffer)
+  if(!token && isProtectedRoute){
+    
+    const loginUrl = new URL('/login',request.url)
+    loginUrl.searchParams.set('redirect',pathname);
+    return NextResponse.redirect(loginUrl)
+  }
 return NextResponse.next();
   
-}
 }
 
 export const config = {

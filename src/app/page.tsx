@@ -10,22 +10,29 @@ import Menu from "@/components/menu/Menu";
 import Social from "@/components/social/Social";
 import ProfileMenu from "@/components/profileMenu/ProfileMenu";
 import CreatePost from "@/components/createPost/CreatePost";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { decrement, increment } from "@/redux/features/counter/counterSlice";
-import { setUser } from "@/redux/features/auth/authSlice";
+import { useDispatch} from "react-redux";
+import { SelectedUser, setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useGetMyProfileQuery } from "@/redux/features/user/userApi";
 
 
 
 
 
-export default function Home() {
-const user = 'Michel';
+ const Home =()=> {
+  const dispatch = useAppDispatch();
+  const {data,isLoading} = useGetMyProfileQuery(undefined,{
+    skip:!dispatch
+  });
+  const currentUser = data?.data;
+  console.log(currentUser)
+  if(!isLoading && currentUser){
+    dispatch(setUser({user:currentUser}))
+  }
 
-  const counter = useSelector((state:RootState)=>state.counter.value)
-  console.log(counter);
-  const dispatch = useDispatch();
-  dispatch(setUser({user:{name:'Michel'},token:'abcd1234'}))
+  
+
+  
   return (
     <div className="">
       <main className="hidden md:grid grid-cols-4">
@@ -53,25 +60,21 @@ const user = 'Michel';
             <Form />
           </div>
           {/* create post section */}
-          <CreatePost user={user}/>
-          <div>
-            <button onClick={()=>dispatch(increment())}>count++</button>
-            <span className="mx-5">{counter}</span>
-            <button onClick={()=>dispatch(decrement())}> count--</button>
-          </div>
+          <CreatePost user={currentUser?.firstName||'user'}/>
+          
         </section>
         {/* right side */}
         <section className="mx-10 col-span-1 mt-10">
           {/* profile menu section  */}
-          <div className="flex justify-center items-start">
+          <div className="flex just0ify-center items-start">
            
              <button className="mr-3"><CiSettings size={26} /></button>
             <button className="mx-3"><IoMdNotificationsOutline size={26} /></button>
           
             <div className="flex justify-center items-start w-48">
               <Avatar className="mr-3">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarImage src={currentUser?.profilePic||''} />
+                <AvatarFallback>{currentUser?.firstName}</AvatarFallback>
               </Avatar>
               <ProfileMenu/>
             </div>
@@ -82,3 +85,4 @@ const user = 'Michel';
     </div>
   );
 }
+export default Home;

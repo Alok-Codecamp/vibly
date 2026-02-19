@@ -7,7 +7,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import verifyToken from '../utils/verifyToken';
 import { setUser } from '@/redux/features/auth/authSlice';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useGetMyProfileQuery } from '@/redux/features/user/userApi';
 
 type TformData = {
 email:string;
@@ -18,9 +19,9 @@ const Page = () => {
 
 const dispatch = useAppDispatch();
 const [signin,{error,isLoading}] = useSigninMutation()
-const pathName = usePathname();
 const router = useRouter();
-console.log('pathname',pathName)
+const searchparams = useSearchParams();
+const redirectPath = searchparams.get('redirect')||'/';
 
   const {
     register, 
@@ -31,18 +32,17 @@ console.log('pathname',pathName)
   // form data handler 
 const onSubmit = async (formData:any) =>{
   try{
-    console.log(isLoading);
     const loginResponse = await signin(formData);
 
     if(loginResponse){
       const token = loginResponse?.data?.token;
       
       const decodedToken = verifyToken(token?.access_token);
-      console.log(decodedToken)
-
-      dispatch(setUser({user:decodedToken,token:token?.access_token}))
-
-      router.push(pathName||'/')
+      if(decodedToken){
+        const {email,role} = decodedToken;
+        dispatch(setUser({user:{email,role}}))
+      }
+      router.push(redirectPath);
     }
   }
   catch(error){

@@ -1,6 +1,7 @@
 "use client"
-import { logOut } from "@/redux/features/auth/authSlice";
-import { useAppDispatch } from "@/redux/hooks";
+import delteCookies from "@/app/utils/deleteCookies";
+import { logOut, SelectedUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { cookies } from "next/headers";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +11,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { MdGroups, MdHome } from "react-icons/md";
 
 const ProfileMenu = () => {
+    const user = useAppSelector(SelectedUser)
+    console.log(user)
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -25,13 +28,13 @@ const ProfileMenu = () => {
     }
     document.addEventListener("mousedown", handleTriggerClickOutside);
     return ()=>{
-        document.removeEventListener("mousedown",handleTriggerClickOutside)
+        document.removeEventListener("mousedown",handleTriggerClickOutside) 
     }
  },[])
 
-const handleLogOut = () =>{
+const handleLogOut = async() =>{
     dispatch(logOut())
-    
+    await delteCookies();
     router.push('/login')
 }
     return (
@@ -40,8 +43,7 @@ const handleLogOut = () =>{
             <div>
                 
                 {/* dropdown trigger */}
-                    <button   onClick={handleTriggerClick}className="w-full cursor-pointer flex justify-start items-center text-lg font-medium text-gray-700 hover:text-black">
-Menu<IoIosArrowDown  className={`ml-1 transition-transform duration-300 ${
+                    <button   onClick={handleTriggerClick}className="w-full cursor-pointer flex justify-start items-center text-lg font-medium text-gray-700 hover:text-black">{user?.firstName}<IoIosArrowDown  className={`ml-1 transition-transform duration-300 ${
                 open ? "rotate-180" : ""
               }`} />
                     </button>
